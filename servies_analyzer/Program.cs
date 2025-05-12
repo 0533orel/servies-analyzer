@@ -66,7 +66,16 @@ namespace servies_analyser
             }
 
 
-            
+
+
+            void printInOrder(List<double> dblList)
+            {
+                foreach (var x in dblList)
+                {
+                    Console.Write($"{x} ");
+                }
+            }
+
         }
     }
 }
