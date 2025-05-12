@@ -88,6 +88,23 @@ namespace servies_analyser
                 }
             }
 
+
+
+
+            double maxNumber(List<Double> list)
+            {
+                double max = 0;
+                foreach (var number in list)
+                {
+                    if (number > max)
+                    {
+                        max = number;
+                    }
+                }
+                return max;
+            }
+
+
         }
     }
 }
