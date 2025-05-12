@@ -76,6 +76,18 @@ namespace servies_analyser
                 }
             }
 
+
+
+
+
+            void printRevers(List<double> dblList)
+            {
+                for (int i = dblList.Count - 1; i >= 0; i--)
+                {
+                    Console.Write($"{dblList[i]} ");
+                }
+            }
+
         }
     }
 }
