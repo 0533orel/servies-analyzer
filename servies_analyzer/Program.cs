@@ -42,12 +42,13 @@ namespace servies_analyser
         {
             string userInput;
             
-            while (true)
+            while (true) // Runs as long as the input is invalid
             {
                 Console.WriteLine("Enter a series of at least 3 numbers with a comma between each number.");
                 userInput = Console.ReadLine();
 
-                if (string.IsNullOrEmpty(userInput) || isNotNum(userInput))
+                if (string.IsNullOrEmpty(userInput) ||
+                    isNotNum(userInput))
                 {
                     Console.WriteLine("Invalid input. Please try again.");
                 }
@@ -61,7 +62,7 @@ namespace servies_analyser
                     {
                         if (endWithNum(userInput))
                         {
-                            break;
+                            break; // Exits the loop because the input is correct.
                         }
                         else
                         {
@@ -83,6 +84,7 @@ namespace servies_analyser
         {
             int lastCahr = strInput.Length - 1;
             string numbers = "1234567890";
+
 
             foreach (char number in numbers)
             {
@@ -110,7 +112,7 @@ namespace servies_analyser
                 {
                     countComma++;
                 }
-                if (countComma == 2)
+                if (countComma == 2) // This means there are at least 3 numbers in the series.
                 {
                     return false;
                 }
@@ -134,8 +136,7 @@ namespace servies_analyser
                     specialCharacter.Contains(strInput[i]) ||
                     strInput[i] == ',' && strInput[i + 1] == ',' ||
                     strInput[i] == '.' && strInput[i + 1] == '.' ||
-                    strInput[i] == '.' && strInput[i + 1] == ',' ||
-                    strInput[i] == ',' && strInput[i + 1] == '.')
+                    strInput[i] == '.' && strInput[i + 1] == ',')
                 {
                     return true;
                 }
@@ -187,7 +188,7 @@ namespace servies_analyser
 
             string[] strArray = strInput.Split(",");
 
-            if (isValidNumber(strArray))
+            if (isValidNumber(strArray)) // Checks that there is no number like 1.1.1
             {
                 for (int i = 0; i < strArray.Length; i++)
                 {
@@ -197,7 +198,7 @@ namespace servies_analyser
             }
             else
             {
-                Console.WriteLine("Invalid number.");
+                Console.WriteLine("There is invalid number.");
             }
             return numsList;
         }
@@ -205,7 +206,7 @@ namespace servies_analyser
 
 
 
-        static void printInOrder(List<double> List)
+        static void print(List<double> List)
         {
             foreach (var number in List)
             {
@@ -349,13 +350,13 @@ namespace servies_analyser
                         Console.WriteLine("Done!");
                         break;
                     case "b":
-                        printInOrder(listOfNumabers);
+                        print(listOfNumabers);
                         break;
                     case "c":
                         printRevers(listOfNumabers);
                         break;
                     case "d":
-                        printInOrder(bubbleSort(listOfNumabers));
+                        print(bubbleSort(listOfNumabers));
                         break;
                     case "e":
                         Console.WriteLine($"The max value is: {maxNumber(listOfNumabers)}");
