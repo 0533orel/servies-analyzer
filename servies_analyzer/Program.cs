@@ -2,248 +2,287 @@
 
 namespace servies_analyser
 {
-    class program()
+    class Program()
     {
+
         static void Main(string[] args)
         {
+            menu();
+        }
 
 
 
-            List<double> getNumbers()
+        static List<double> getNumbers()
+        {
+            string userInput = inputUser();
+            List<double> numsList = getlist(userInput);
+            return numsList;
+        }
+
+
+
+        static string inputUser()
+        {
+            string userInput;
+            while (true)
             {
-                string userInput = inputUser();
-                List<double> numsList = getlist(userInput);
-                return numsList;
-            }
+                Console.WriteLine("Enter a series of at least 3 numbers with a comma between each number.");
+                userInput = Console.ReadLine();
 
-
-
-            string inputUser()
-            {
-                string userInput;
-                while (true)
+                if (string.IsNullOrEmpty(userInput) || isNotNum(userInput))
                 {
-                    Console.WriteLine("Enter a series of at least 3 numbers with a comma between each number.");
-                    userInput = Console.ReadLine();
-
-                    if (string.IsNullOrEmpty(userInput) || isNotNum(userInput))
+                    Console.WriteLine("Invalid input. Please try again.");
+                }
+                else
+                {
+                    if (isShort(userInput))
                     {
-                        Console.WriteLine("Invalid input. Please try again.");
+                        Console.WriteLine("You entered less than three numbers, please try again.");
                     }
                     else
                     {
-                        if (isShort(userInput))
+                        if (endWithNum(userInput))
                         {
-                            Console.WriteLine("You entered less than three numbers, please try again.");
+                            break;
                         }
                         else
                         {
-                            if (endWithNum(userInput))
-                            {
-                                break;
-                            }
-                            else
-                            {
-                                Console.WriteLine("Invalid input. Please try again.");
-                            }
+                            Console.WriteLine("Invalid input. Please try again.");
                         }
-
                     }
+
                 }
-                return userInput;
             }
+            return userInput;
+        }
 
 
-            bool endWithNum(string strInput)
+        static bool endWithNum(string strInput)
+        {
+            int lastCahr = strInput.Length - 1;
+            string numbers = "1234567890";
+
+            foreach (char number in numbers)
             {
-                int lastCahr = strInput.Length - 1;
-                string numbers = "1234567890";
-
-                foreach (char number in numbers)
+                if (strInput[lastCahr] == number)
                 {
-                    if (strInput[lastCahr] == number)
-                    {
-                        return true;
-                    }
-                }                
-                return false;
+                    return true;
+                }
             }
+            return false;
+        }
 
 
 
 
-            bool isShort(string strInput)
+        static bool isShort(string strInput)
+        {
+            int countComma = 0;
+            foreach (char item in strInput)
             {
-                int countComma = 0;
-                foreach (char item in strInput)
+                if (item == ',')
                 {
-                    if (item == ',')
+                    countComma++;
+                }
+                if (countComma == 2)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+
+
+        static bool isNotNum(string strInput)
+        {
+            string specialCharacter = "!@#$%^&*()_-+=<>?/:;'\\\"";
+
+            for (int i = 0; i < strInput.Length - 1; i++)
+            {
+                if (char.IsLetter(strInput[i]) ||
+                    specialCharacter.Contains(strInput[i]) ||
+                    strInput[i] == ',' && strInput[i + 1] == ',' ||
+                    strInput[i] == '.' && strInput[i + 1] == '.')
+                {
+                    return true;
+                }
+            }
+            return false;            
+        }
+
+
+
+        static bool isValidNumber(string[] strArray)
+        {
+            int countPoint;
+
+            foreach (var value in strArray)
+            {
+                countPoint = 0;
+                if (value.Length > 1)
+                {
+                    foreach (var item in value)
                     {
-                        countComma++;
+                        if (item == '.')
+                        {
+                            countPoint++;
+                        }
                     }
-                    if (countComma == 2)
+                    if (countPoint > 1)
                     {
                         return false;
                     }
                 }
-                return true;
-                
             }
+            return true;           
+        }
 
 
 
-            bool isNotNum(string strInput)
+        static List<double> getlist(string strInput)
+        {
+            List<double> numsList = new List<double>();
+
+            string[] strArray = strInput.Split(",");
+
+            if (isValidNumber(strArray))
             {
-                string specialCharacter = "!@#$%^&*()_-+=<>?/:;'\\\"";
-
-
-                foreach (char item in strInput)
-                {
-                    if (char.IsLetter(item) || specialCharacter.Contains(item))
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
-
-
-
-
-
-            List<double> getlist(string strInput)
-            {
-                string[] strArray = strInput.Split(",");
-
-                List<double> numsList = new List<double>();
-
                 for (int i = 0; i < strArray.Length; i++)
                 {
+
                     numsList.Add(double.Parse(strArray[i]));
-                }
-                return numsList;
+                }   
             }
-
-
-
-
-            void printInOrder(List<double> dblList)
+            else
             {
-                foreach (var x in dblList)
-                {
-                    Console.Write($"{x} ");
-                }
-                Console.WriteLine();
+                Console.WriteLine("Invalid input. Please try again.");
+                inputUser();
             }
+            return numsList;
+        }
 
 
 
 
-
-            void printRevers(List<double> dblList)
+        static void printInOrder(List<double> dblList)
+        {
+            foreach (var x in dblList)
             {
-                for (int i = dblList.Count - 1; i >= 0; i--)
-                {
-                    Console.Write($"{dblList[i]} ");
-                }
-                Console.WriteLine();
+                Console.Write($"{x} ");
             }
+            Console.WriteLine();
+        }
 
 
 
 
-            double maxNumber(List<Double> list)
+
+        static void printRevers(List<double> dblList)
+        {
+            for (int i = dblList.Count - 1; i >= 0; i--)
             {
-                double maxNum = 0;
-                foreach (var number in list)
+                Console.Write($"{dblList[i]} ");
+            }
+            Console.WriteLine();
+        }
+
+
+
+
+        static double maxNumber(List<Double> list)
+        {
+            double maxNum = 0;
+            foreach (var number in list)
+            {
+                if (number > maxNum)
                 {
-                    if (number > maxNum)
+                    maxNum = number;
+                }
+            }
+            return maxNum;
+        }
+
+
+
+
+
+
+        static double minNumber(List<Double> list)
+        {
+            double minNum = list[0];
+            foreach (var number in list)
+            {
+                if (number < minNum)
+                {
+                    minNum = number;
+                }
+            }
+            return minNum;
+        }
+
+
+
+
+        static double sumList(List<Double> list)
+        {
+            double sumNumbers = 0;
+            foreach (var number in list)
+            {
+                sumNumbers += number;
+            }
+            return sumNumbers;
+        }
+
+
+
+        static int lengthList(List<Double> list)
+        {
+            int len = 0;
+            foreach (var number in list)
+            {
+                len++;
+            }
+            return len;
+        }
+
+
+
+
+        static double avarageList(List<Double> list)
+        {
+            return sumList(list) / lengthList(list);
+        }
+
+
+
+
+
+        static List<double> bobbleSort(List<Double> list)
+        {
+            for (int i = 0; i < list.Count - 1; i++)
+            {
+                bool sorted = true;
+                for (int j = 0; j < list.Count - 1 - i; j++)
+                {
+                    if (list[j] > list[j + 1])
                     {
-                        maxNum = number;
+                        double temp = list[j];
+                        list[j] = list[j + 1];
+                        list[j + 1] = temp;
+                        sorted = false;
                     }
                 }
-                return maxNum;
+                if (sorted)
+                    break;
             }
+            return list;
+        }
 
 
 
-
-
-
-            double minNumber(List<Double> list)
-            {
-                double minNum = list[0];
-                foreach (var number in list)
-                {
-                    if (number < minNum)
-                    {
-                        minNum = number;
-                    }
-                }
-                return minNum;
-            }
-
-
-
-
-            double sumList(List<Double> list)
-            {
-                double sumNumbers = 0;
-                foreach (var number in list)
-                {
-                    sumNumbers += number;
-                }
-                return sumNumbers;
-            }
-
-
-
-            int lengthList(List<Double> list)
-            {
-                int len = 0;
-                foreach (var number in list)
-                {
-                    len++;
-                }
-                return len;
-            }
-
-
-
-
-            double avarageList(List<Double> list)
-            {
-                return sumList(list) / lengthList(list);
-            }
-
-
-
-
-
-            List<double> bobbleSort(List<Double> list)
-            {
-                for (int i = 0; i < list.Count - 1; i++)
-                {
-                    bool sorted = true;
-                    for (int j = 0; j < list.Count - 1 - i; j++)
-                    {
-                        if (list[j] > list[j + 1])
-                        {
-                            double temp = list[j];
-                            list[j] = list[j + 1];
-                            list[j + 1] = temp;
-                            sorted = false;
-                        }
-                    }
-                    if (sorted)
-                        break;
-                }
-                return list;
-            }
-
-
-
-
+        static void menu()
+        {
             Console.Write("Welcom to the program! \nplease ");
             List<double> listOfNumabers = getNumbers();
 
@@ -288,10 +327,7 @@ namespace servies_analyser
                         Console.WriteLine($"the Average of the series is: {avarageList(listOfNumabers)}");
                         break;
                     case "h":
-                        if (listOfNumabers.Count == 1)
-                            Console.WriteLine($"There is {lengthList(listOfNumabers)} number in the series.");
-                        else
-                            Console.WriteLine($"There are {lengthList(listOfNumabers)} numbers in the series.");
+                        Console.WriteLine($"There are {lengthList(listOfNumabers)} numbers in the series.");
                         break;
                     case "i":
                         Console.WriteLine($"the Sum of the series is: {sumList(listOfNumabers)}");
@@ -307,15 +343,9 @@ namespace servies_analyser
                 }
 
             } while (again);
-
-
-
-
-
-
-
         }
     }
 }
+
 
 

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("servies_analyzer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c3733113e75eee0a7c9bcd25930a605232a6f98e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bf10ebf78f64d920bf7bc03a234d11de225db575")]
 [assembly: System.Reflection.AssemblyProductAttribute("servies_analyzer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("servies_analyzer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
