@@ -151,6 +151,12 @@ namespace servies_analyser
 
 
 
+
+            double avarageList(List<Double> list)
+            {
+                return sumList(list) / lengthList(list);
+            }
+
         }
     }
 }
