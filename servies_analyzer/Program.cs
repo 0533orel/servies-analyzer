@@ -11,19 +11,37 @@ namespace servies_analyser
         }
 
 
-
+        /// <summary>
+        /// A function accepts numbers as a string and returns them as a list.
+        /// </summary>
+        /// <returns></returns>
         static List<double> getNumbers()
         {
-            string userInput = inputUser();
-            List<double> numsList = getlist(userInput);
+            List<double> numsList;
+            bool emptyList = true;
+
+            do // Will run as long as the list is empty.
+            {
+                string userInput = inputUser();
+                numsList = getlist(userInput);
+                if (numsList.Count > 0)
+                {
+                    emptyList = false;
+                }
+            } while (emptyList);
+            
             return numsList;
         }
 
 
-
+        /// <summary>
+        /// A function that receives input from the user, checks that the numbers have been entered and the length is correct, and returns them as a string.
+        /// </summary>
+        /// <returns></returns>
         static string inputUser()
         {
             string userInput;
+            
             while (true)
             {
                 Console.WriteLine("Enter a series of at least 3 numbers with a comma between each number.");
@@ -56,7 +74,11 @@ namespace servies_analyser
             return userInput;
         }
 
-
+        /// <summary>
+        /// A Boolean function that accepts a string and checks that it ends with a number and not with ',' or '.'
+        /// </summary>
+        /// <param name="strInput"></param>
+        /// <returns></returns>
         static bool endWithNum(string strInput)
         {
             int lastCahr = strInput.Length - 1;
@@ -74,7 +96,11 @@ namespace servies_analyser
 
 
 
-
+        /// <summary>
+        /// A Boolean function that accepts a string with a series of numbers and checks if there are fewer than 3 numbers in the series.
+        /// </summary>
+        /// <param name="strInput"></param>
+        /// <returns></returns>
         static bool isShort(string strInput)
         {
             int countComma = 0;
@@ -93,7 +119,11 @@ namespace servies_analyser
         }
 
 
-
+        /// <summary>
+        /// A Boolean function that accepts a string and checks if it contains a letter or special character or '.' or ',' in sequence.
+        /// </summary>
+        /// <param name="strInput"></param>
+        /// <returns></returns>
         static bool isNotNum(string strInput)
         {
             string specialCharacter = "!@#$%^&*()_-+=<>?/:;'\\\"";
@@ -103,7 +133,9 @@ namespace servies_analyser
                 if (char.IsLetter(strInput[i]) ||
                     specialCharacter.Contains(strInput[i]) ||
                     strInput[i] == ',' && strInput[i + 1] == ',' ||
-                    strInput[i] == '.' && strInput[i + 1] == '.')
+                    strInput[i] == '.' && strInput[i + 1] == '.' ||
+                    strInput[i] == '.' && strInput[i + 1] == ',' ||
+                    strInput[i] == ',' && strInput[i + 1] == '.')
                 {
                     return true;
                 }
@@ -112,7 +144,11 @@ namespace servies_analyser
         }
 
 
-
+        /// <summary>
+        /// A boolean function that accepts an array of numbers in a string and verifies that the number is valid.
+        /// </summary>
+        /// <param name="strArray"></param>
+        /// <returns></returns>
         static bool isValidNumber(string[] strArray)
         {
             int countPoint;
@@ -140,6 +176,11 @@ namespace servies_analyser
 
 
 
+        /// <summary>
+        /// A function that accepts a string with numbers. Converts it to an array and then to a list of type double if the numbers are valid and returns the list.
+        /// </summary>
+        /// <param name="strInput"></param>
+        /// <returns></returns>
         static List<double> getlist(string strInput)
         {
             List<double> numsList = new List<double>();
@@ -156,8 +197,7 @@ namespace servies_analyser
             }
             else
             {
-                Console.WriteLine("Invalid input. Please try again.");
-                inputUser();
+                Console.WriteLine("Invalid number.");
             }
             return numsList;
         }
@@ -165,11 +205,11 @@ namespace servies_analyser
 
 
 
-        static void printInOrder(List<double> dblList)
+        static void printInOrder(List<double> List)
         {
-            foreach (var x in dblList)
+            foreach (var number in List)
             {
-                Console.Write($"{x} ");
+                Console.Write($"{number} ");
             }
             Console.WriteLine();
         }
@@ -178,11 +218,11 @@ namespace servies_analyser
 
 
 
-        static void printRevers(List<double> dblList)
+        static void printRevers(List<double> List)
         {
-            for (int i = dblList.Count - 1; i >= 0; i--)
+            for (int i = List.Count - 1; i >= 0; i--)
             {
-                Console.Write($"{dblList[i]} ");
+                Console.Write($"{List[i]} ");
             }
             Console.WriteLine();
         }
@@ -249,7 +289,7 @@ namespace servies_analyser
 
 
 
-        static double avarageList(List<Double> list)
+        static double averageList(List<Double> list)
         {
             return sumList(list) / lengthList(list);
         }
@@ -258,7 +298,7 @@ namespace servies_analyser
 
 
 
-        static List<double> bobbleSort(List<Double> list)
+        static List<double> bubbleSort(List<Double> list)
         {
             for (int i = 0; i < list.Count - 1; i++)
             {
@@ -283,13 +323,13 @@ namespace servies_analyser
 
         static void menu()
         {
-            Console.Write("Welcom to the program! \nplease ");
+            Console.WriteLine("Welcome to the program!");
             List<double> listOfNumabers = getNumbers();
 
             bool again = true;
             do
             {
-                Console.WriteLine("chose from the menu below: \n" +
+                Console.WriteLine("Choose from the menu below: \n" +
                     "a.\tInput a Series. (Replace the current series) \n" +
                     "b.\tDisplay the series in the order it was entered. \n" +
                     "c.\tDisplay the series in the reversed order it was entered. \n" +
@@ -306,7 +346,7 @@ namespace servies_analyser
                 {
                     case "a":
                         listOfNumabers = getNumbers();
-                        Console.WriteLine("done!");
+                        Console.WriteLine("Done!");
                         break;
                     case "b":
                         printInOrder(listOfNumabers);
@@ -315,29 +355,29 @@ namespace servies_analyser
                         printRevers(listOfNumabers);
                         break;
                     case "d":
-                        printInOrder(bobbleSort(listOfNumabers));
+                        printInOrder(bubbleSort(listOfNumabers));
                         break;
                     case "e":
-                        Console.WriteLine($"the Max value is: {maxNumber(listOfNumabers)}");
+                        Console.WriteLine($"The max value is: {maxNumber(listOfNumabers)}");
                         break;
                     case "f":
-                        Console.WriteLine($"the Min value is: {minNumber(listOfNumabers)}");
+                        Console.WriteLine($"The min value is: {minNumber(listOfNumabers)}");
                         break;
                     case "g":
-                        Console.WriteLine($"the Average of the series is: {avarageList(listOfNumabers)}");
+                        Console.WriteLine($"The average of the series is: {averageList(listOfNumabers)}");
                         break;
                     case "h":
                         Console.WriteLine($"There are {lengthList(listOfNumabers)} numbers in the series.");
                         break;
                     case "i":
-                        Console.WriteLine($"the Sum of the series is: {sumList(listOfNumabers)}");
+                        Console.WriteLine($"The sum of the series is: {sumList(listOfNumabers)}");
                         break;
                     case "j":
-                        Console.WriteLine("thank you and godbay.");
+                        Console.WriteLine("Thank you and goodbye.");
                         again = false;
                         break;
                     default:
-                        Console.WriteLine("invalid input. please try again.");
+                        Console.WriteLine("Invalid input. please try again.");
                         break;
 
                 }
