@@ -38,13 +38,37 @@ namespace servies_analyser
                         }
                         else
                         {
-                            break;
+                            if (endWithNum(userInput))
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid input. Please try again.");
+                            }
                         }
 
                     }
                 }
                 return userInput;
             }
+
+
+            bool endWithNum(string strInput)
+            {
+                int lastCahr = strInput.Length - 1;
+                string numbers = "1234567890";
+
+                foreach (char number in numbers)
+                {
+                    if (strInput[lastCahr] == number)
+                    {
+                        return true;
+                    }
+                }                
+                return false;
+            }
+
 
 
 
