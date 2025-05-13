@@ -34,6 +34,7 @@ namespace servies_analyser
         }
 
 
+
         /// <summary>
         /// A function that receives input from the user, checks that the numbers have been entered and the length is correct, and returns them as a string.
         /// </summary>
@@ -45,7 +46,8 @@ namespace servies_analyser
             while (true) // Runs as long as the input is invalid
             {
                 Console.WriteLine("Enter a series of at least 3 numbers with a comma between each number.");
-                userInput = Console.ReadLine();
+                userInput = Console.ReadLine().Trim();
+
 
                 if (string.IsNullOrEmpty(userInput) ||
                     isNotNum(userInput))
@@ -74,6 +76,8 @@ namespace servies_analyser
             }
             return userInput;
         }
+
+
 
         /// <summary>
         /// A Boolean function that accepts a string and checks that it ends with a number and not with ',' or '.'
@@ -121,6 +125,7 @@ namespace servies_analyser
         }
 
 
+
         /// <summary>
         /// A Boolean function that accepts a string and checks if it contains a letter or special character or '.' or ',' in sequence.
         /// </summary>
@@ -132,6 +137,7 @@ namespace servies_analyser
 
             for (int i = 0; i < strInput.Length - 1; i++)
             {
+
                 if (char.IsLetter(strInput[i]) ||
                     specialCharacter.Contains(strInput[i]) ||
                     strInput[i] == ',' && strInput[i + 1] == ',' ||
@@ -143,6 +149,7 @@ namespace servies_analyser
             }
             return false;            
         }
+
 
 
         /// <summary>
@@ -205,7 +212,6 @@ namespace servies_analyser
 
 
 
-
         static void print(List<double> List)
         {
             foreach (var number in List)
@@ -217,8 +223,6 @@ namespace servies_analyser
 
 
 
-
-
         static void printRevers(List<double> List)
         {
             for (int i = List.Count - 1; i >= 0; i--)
@@ -227,7 +231,6 @@ namespace servies_analyser
             }
             Console.WriteLine();
         }
-
 
 
 
@@ -246,9 +249,6 @@ namespace servies_analyser
 
 
 
-
-
-
         static double minNumber(List<Double> list)
         {
             double minNum = list[0];
@@ -263,8 +263,6 @@ namespace servies_analyser
         }
 
 
-
-
         static double sumList(List<Double> list)
         {
             double sumNumbers = 0;
@@ -274,7 +272,6 @@ namespace servies_analyser
             }
             return sumNumbers;
         }
-
 
 
         static int lengthList(List<Double> list)
@@ -289,13 +286,10 @@ namespace servies_analyser
 
 
 
-
         static double averageList(List<Double> list)
         {
             return sumList(list) / lengthList(list);
         }
-
-
 
 
 
