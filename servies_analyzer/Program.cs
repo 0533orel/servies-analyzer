@@ -26,7 +26,7 @@ namespace servies_analyser
                     Console.WriteLine("Enter a series of at least 3 numbers with a comma between each number.");
                     userInput = Console.ReadLine();
 
-                    if (string.IsNullOrEmpty(userInput) || isLetter(userInput))
+                    if (string.IsNullOrEmpty(userInput) || isNotNum(userInput))
                     {
                         Console.WriteLine("Invalid input. Please try again.");
                     }
@@ -68,11 +68,14 @@ namespace servies_analyser
 
 
 
-            bool isLetter(string strInput)
+            bool isNotNum(string strInput)
             {
+                string specialCharacter = "!@#$%^&*()_-+=<>?/:;'\\\"";
+
+
                 foreach (char item in strInput)
                 {
-                    if (char.IsLetter(item))
+                    if (char.IsLetter(item) || specialCharacter.Contains(item))
                     {
                         return true;
                     }
