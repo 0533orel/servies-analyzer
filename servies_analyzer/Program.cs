@@ -50,7 +50,24 @@ namespace servies_analyser
                 else
                     return false;
             }
-            
+
+
+
+            bool isLetter(List<double> list)
+            {
+                foreach (char item in list)
+                {
+                    if (char.IsLetter(item))
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+
+
+
 
             List<double> getlist(string strInput)
             {
@@ -180,13 +197,6 @@ namespace servies_analyser
                         break;
                 }
                 return list;
-
-
-
-
-
-
-
 
 
 
