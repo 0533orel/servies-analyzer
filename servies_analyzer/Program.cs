@@ -25,7 +25,7 @@ namespace servies_analyser
                 string userInput;
                 while (true)
                 {
-                    Console.WriteLine("Enter a series of numbers with a comma between each number.");
+                    Console.WriteLine("enter a series of numbers with a comma between each number.");
                     userInput = Console.ReadLine();
                     if (isNull(userInput))
                     {
@@ -74,6 +74,7 @@ namespace servies_analyser
                 {
                     Console.Write($"{x} ");
                 }
+                Console.WriteLine();
             }
 
 
@@ -86,6 +87,7 @@ namespace servies_analyser
                 {
                     Console.Write($"{dblList[i]} ");
                 }
+                Console.WriteLine();
             }
 
 
@@ -93,16 +95,37 @@ namespace servies_analyser
 
             double maxNumber(List<Double> list)
             {
-                double max = 0;
+                double maxNum = 0;
                 foreach (var number in list)
                 {
-                    if (number > max)
+                    if (number > maxNum)
                     {
-                        max = number;
+                        maxNum = number;
                     }
                 }
-                return max;
+                return maxNum;
             }
+
+
+         
+
+
+
+            double minNumber(List<Double> list)
+            {
+                double minNum = list[0];
+                foreach (var number in list)
+                {
+                    if (number < minNum)
+                    {
+                        minNum = number;
+                    }
+                }
+                return minNum;
+            }
+
+
+
 
 
         }
