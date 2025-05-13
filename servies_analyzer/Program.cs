@@ -139,6 +139,17 @@ namespace servies_analyser
 
 
 
+            int lengthList(List<Double> list)
+            {
+                int len = 0;
+                foreach (var number in list)
+                {
+                    len++;
+                }
+                return len;
+            }
+
+
 
         }
     }
