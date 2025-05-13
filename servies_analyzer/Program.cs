@@ -127,6 +127,18 @@ namespace servies_analyser
 
 
 
+            double sumList(List<Double> list)
+            {
+                double sumNumbers = 0;
+                foreach (var number in list)
+                {
+                    sumNumbers += number;
+                }
+                return sumNumbers;
+            }
+
+
+
 
         }
     }
