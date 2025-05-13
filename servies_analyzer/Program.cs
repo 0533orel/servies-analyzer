@@ -157,6 +157,31 @@ namespace servies_analyser
                 return sumList(list) / lengthList(list);
             }
 
+
+
+
+
+            List<double> bobbleSort(List<Double> list)
+            {
+                for (int i = 0; i < list.Count - 1; i++)
+                {
+                    bool sorted = true;
+                    for (int j = 0; j < list.Count - 1 - i; j++)
+                    {
+                        if (list[j] > list[j + 1])
+                        {
+                            double temp = list[j];
+                            list[j] = list[j + 1];
+                            list[j + 1] = temp;
+                            sorted = false;
+                        }
+                    }
+                    if (sorted)
+                        break;
+                }
+                return list;
+            }
+
         }
     }
 }
