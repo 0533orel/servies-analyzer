@@ -180,8 +180,83 @@ namespace servies_analyser
                         break;
                 }
                 return list;
-            }
 
+
+
+
+
+
+
+
+
+
+
+
+                Console.Write("Welcom to the program! \nplease ");
+                List<double> listOfNumabers = getNumbers();
+
+                bool again = true;
+                do
+                {
+                    Console.WriteLine("chose from the menu below: \n" +
+                        "a.\tInput a Series. (Replace the current series) \n" +
+                        "b.\tDisplay the series in the order it was entered. \n" +
+                        "c.\tDisplay the series in the reversed order it was entered. \n" +
+                        "d.\tDisplay the series in sorted order (from low to high). \n" +
+                        "e.\tDisplay the Max value of the series. \n" +
+                        "f.\tDisplay the Min value of the series. \n" +
+                        "g.\tDisplay the Average of the series. \n" +
+                        "h.\tDisplay the Number of elements in the series. \n" +
+                        "i.\tDisplay the Sum of the series. \n" +
+                        "j.\tExit.");
+                    string userChoose = Console.ReadLine().ToLower();
+
+                    switch (userChoose)
+                    {
+                        case "a":
+                            listOfNumabers = getNumbers();
+                            Console.WriteLine("done!");
+                            break;
+                        case "b":
+                            printInOrder(listOfNumabers);
+                            break;
+                        case "c":
+                            printRevers(listOfNumabers);
+                            break;
+                        case "d":
+                            printInOrder(bobbleSort(listOfNumabers));
+                            break;
+                        case "e":
+                            Console.WriteLine($"the Max value is: {maxNumber(listOfNumabers)}");
+                            break;
+                        case "f":
+                            Console.WriteLine($"the Min value is: {minNumber(listOfNumabers)}");
+                            break;
+                        case "g":
+                            Console.WriteLine($"the Average of the series is: {avarageList(listOfNumabers)}");
+                            break;
+                        case "h":
+                            if (listOfNumabers.Count == 1)
+                                Console.WriteLine($"There is {lengthList(listOfNumabers)} number in the series.");
+                            else
+                                Console.WriteLine($"There are {lengthList(listOfNumabers)} numbers in the series.");
+                            break;
+                        case "i":
+                            Console.WriteLine($"the Sum of the series is: {sumList(listOfNumabers)}");
+                            break;
+                        case "j":
+                            Console.WriteLine("thank you and godbay.");
+                            again = false;
+                            break;
+                        default:
+                            Console.WriteLine("invalid input. please try again.");
+                            break;
+
+                    }
+
+                } while (again);
+
+
+            }
         }
-    }
 }
